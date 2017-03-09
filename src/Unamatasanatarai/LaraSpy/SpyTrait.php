@@ -2,6 +2,9 @@
 
 namespace Unamatasanatarai\LaraSpy;
 
+use Auth;
+use Spy;
+
 trait SpyTrait
 {
 
@@ -28,9 +31,11 @@ trait SpyTrait
             Spy::log(sprintf('Deleted %s[%s]', get_class($model), $model->id), [], $model->spyGetUserId());
         });
 
-        static::restored(function ($model) {
-            Spy::log(sprintf('Restored %s[%s]', get_class($model), $model->id), [], $model->spyGetUserId());
-        });
+        if ( method_exists(__CLASS__, 'restored') ) {
+            static::restored(function ($model) {
+                Spy::log(sprintf('Restored %s[%s]', get_class($model), $model->id), [], $model->spyGetUserId());
+            });
+        }
     }
 
 
