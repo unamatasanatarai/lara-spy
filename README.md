@@ -10,7 +10,7 @@ Unamatasanatarai\LaraSpy\SpyServiceProvider::class
 ```
 'aliases' => [
     ...
-    'Spy' => 'Unamatasanatarai\LaraSpy\SpyFacade',
+    'Spy' => Unamatasanatarai\LaraSpy\SpyFacade::class,
 ];
 ```
 

@@ -25,7 +25,7 @@ class SpyServiceProvider extends ServiceProvider
             $timestamp = date('Y_m_d_His', time());
 
             $this->publishes([
-                __DIR__ . "/../../migrations/create_lara_spy_table.stub" => database_path("/migrations/{$timestamp}_create_lara_spy_table.php"),
+                __DIR__ . "/migrations/create_lara_spy_table.stub" => database_path("/migrations/{$timestamp}_create_lara_spy_table.php"),
             ], 'migrations');
         }
     }
