@@ -42,15 +42,23 @@ trait SpyTrait
     public function spyGetChangedFields()
     {
         $toLog = [];
+        $original = $this->getOriginal();
         $dirty = $this->getDirty();
 
         foreach ($dirty as $field => $value) {
-            if ( in_array($field, self::$spyIgnoreColumns) ) {
+            if ( in_array($field, self::$spyIgnoreColumns) || in_array($field, $this->hidden) ) {
                 continue;
             }
-            $toLog[$field] = in_array($field, $this->hidden)
-                ? '_hidden_'
-                : $this->{$field};
+            $toLog['new'][$field] = $this->{$field};
+        }
+
+        foreach ($original as $field => $value) {
+            if ( in_array($field, self::$spyIgnoreColumns) || in_array($field, $this->hidden) ) {
+                continue;
+            }
+            if ( isset($toLog['new'][$field]) ) {
+                $toLog['from'][$field] = $value;
+            }
         }
 
         return $toLog;
