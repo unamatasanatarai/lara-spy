@@ -1,0 +1,22 @@
+{
+    "name": "unamatasanatarai/lara-spy",
+    "type": "library",
+    "description": "Hash me like with dropbox",
+    "homepage": "https://github.com/unamatasanatarai/lara-spy",
+    "keywords": ["laravel5","versioning","revision","activity log"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Unamata Sanatarai",
+            "email": "unamatasanatarai@gmail.com",
+            "homepage": "https://github.com/unamatasanatarai/",
+            "role": "Main Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Unamatasanatarai\\LaraSpy\\": "src/Unamatasanatarai/LaraSpy"
+        }
+    },
+    "minimum-stability": "dev"
+}
