@@ -29,3 +29,4 @@ php artisan vendor:publish --provider="Unamatasanatarai\LaraSpy\SpyServiceProvid
     }
 ],
 ```
+https://packagist.org/packages/unamatasanatarai/lara-spy
