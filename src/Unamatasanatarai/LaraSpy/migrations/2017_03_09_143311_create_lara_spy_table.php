@@ -19,6 +19,8 @@ class CreateLaraSpyTable extends Migration
                 $table->bigIncrements('id');
                 $table->bigInteger('user')->unsigned()->index()->nullable();
                 $table->string('subject')->nullable();
+                $table->string('target_name')->nullable();
+                $table->bigInteger('target_id')->nullable()->unsigned();
                 $table->text('data')->nullable();
                 $table->string('ip', 64)->nullable();
                 $table->timestamps();
