@@ -1,22 +1,26 @@
 {
-    "name": "unamatasanatarai/lara-spy",
-    "type": "library",
-    "description": "Spying utility for model user interactions",
-    "homepage": "https://github.com/unamatasanatarai/lara-spy",
-    "keywords": ["laravel5","versioning","revision","activity log"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Unamata Sanatarai",
-            "email": "unamatasanatarai@gmail.com",
-            "homepage": "https://github.com/unamatasanatarai/",
-            "role": "Main Developer"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Unamatasanatarai\\LaraSpy\\": "src/Unamatasanatarai/LaraSpy"
-        }
-    },
-    "minimum-stability": "dev"
+  "name": "unamatasanatarai/lara-spy",
+  "type": "library",
+  "description": "Spying utility for model user interactions",
+  "homepage": "https://github.com/unamatasanatarai/lara-spy",
+  "keywords": [
+    "laravel5",
+    "versioning",
+    "revision",
+    "activity log"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Unamata Sanatarai",
+      "email": "unamatasanatarai@gmail.com",
+      "homepage": "https://github.com/unamatasanatarai/",
+      "role": "Main Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Unamatasanatarai\\LaraSpy\\": "src/Unamatasanatarai/LaraSpy"
+    }
+  }
 }

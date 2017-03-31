@@ -1,4 +1,5 @@
 <?php
+
 namespace Unamatasanatarai\LaraSpy;
 
 use Illuminate\Support\Facades\Facade;

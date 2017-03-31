@@ -14,7 +14,6 @@ class SpyServiceProvider extends ServiceProvider
      */
     protected $defer = false;
 
-
     /**
      * Bootstrap the application events.
      */
@@ -23,7 +22,6 @@ class SpyServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/migrations/');
     }
 
-
     /**
      * Register the service provider.
      */
@@ -31,10 +29,11 @@ class SpyServiceProvider extends ServiceProvider
     {
         $this->app->bind('spy', 'Unamatasanatarai\LaraSpy\SpySupervisor');
 
-        $this->app->bind('Unamatasanatarai\LaraSpy\Handler\HandlerInterface',
-            'Unamatasanatarai\LaraSpy\Handler\EloquentHandler');
+        $this->app->bind(
+            'Unamatasanatarai\LaraSpy\Handler\HandlerInterface',
+            'Unamatasanatarai\LaraSpy\Handler\EloquentHandler'
+        );
     }
-
 
     /**
      * Get the services provided by the provider.

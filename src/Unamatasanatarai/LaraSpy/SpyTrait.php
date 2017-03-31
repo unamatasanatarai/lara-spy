@@ -10,65 +10,68 @@ trait SpyTrait
 
     static $spyIgnoreColumns = [ 'created_at', 'updated_at', 'deleted_at' ];
 
-
     public static function bootSpyTrait()
     {
-        static::updated(function ($model) {
-            $toLog = $model->spyGetChangedFields();
+        static::updated(
+            function ($model) {
+                $data = $model->spyGetChangedFields();
 
-            if ( ! empty($toLog) ) {
-                Spy::log(sprintf('Updated %s[%s]', get_class($model), $model->id), $toLog, $model->spyGetUserId());
+                if ( ! empty($data)) {
+                    Spy::log('updated', get_class($model), $model->id, $data, $model->spyGetUserId());
+                }
             }
-        });
+        );
 
-        static::created(function ($model) {
-            $toLog = $model->spyGetChangedFields();
+        static::created(
+            function ($model) {
+                $data = $model->spyGetChangedFields();
 
-            Spy::log(sprintf('Created %s[%s]', get_class($model), $model->id), $toLog, $model->spyGetUserId());
-        });
+                Spy::log('created', get_class($model), $model->id, $data, $model->spyGetUserId());
+            }
+        );
 
-        static::deleted(function ($model) {
-            Spy::log(sprintf('Deleted %s[%s]', get_class($model), $model->id), [], $model->spyGetUserId());
-        });
+        static::deleted(
+            function ($model) {
+                Spy::log('deleted', get_class($model), $model->id, [], $model->spyGetUserId());
+            }
+        );
 
-        if ( method_exists(__CLASS__, 'restored') ) {
-            static::restored(function ($model) {
-                Spy::log(sprintf('Restored %s[%s]', get_class($model), $model->id), [], $model->spyGetUserId());
-            });
+        if (method_exists(__CLASS__, 'restored')) {
+            static::restored(
+                function ($model) {
+                    Spy::log('restored', get_class($model), $model->id, [], $model->spyGetUserId());
+                }
+            );
         }
     }
 
-
     public function spyGetChangedFields()
     {
-        $toLog = [];
+        $toLog    = [];
         $original = $this->getOriginal();
-        $dirty = $this->getDirty();
+        $dirty    = $this->getDirty();
 
         foreach ($dirty as $field => $value) {
-            if ( in_array($field, self::$spyIgnoreColumns) || in_array($field, $this->hidden) ) {
+            if (in_array($field, self::$spyIgnoreColumns) || in_array($field, $this->hidden)) {
                 continue;
             }
-            $toLog['new'][$field] = $this->{$field};
+            $toLog['new'][ $field ] = $this->{$field};
         }
 
         foreach ($original as $field => $value) {
-            if ( in_array($field, self::$spyIgnoreColumns) || in_array($field, $this->hidden) ) {
+            if (in_array($field, self::$spyIgnoreColumns) || in_array($field, $this->hidden)) {
                 continue;
             }
-            if ( isset($toLog['new'][$field]) ) {
-                $toLog['from'][$field] = $value;
+            if (isset($toLog['new'][ $field ])) {
+                $toLog['from'][ $field ] = $value;
             }
         }
 
         return $toLog;
     }
 
-
     public function spyGetUserId()
     {
-        return Auth::check()
-            ? Auth::user()->id
-            : null;
+        return Auth::check() ? Auth::user()->id : null;
     }
 }

@@ -1,9 +1,10 @@
 <?php
+
 namespace Unamatasanatarai\LaraSpy;
 
-use Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class SpyModel extends Eloquent
+class SpyModel extends Model
 {
 
     /**
