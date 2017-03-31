@@ -8,7 +8,8 @@ use Spy;
 trait SpyTrait
 {
 
-    static $spyIgnoreColumns = [ 'created_at', 'updated_at', 'deleted_at' ];
+    //use protected $spyIgnoreColumns;
+    //use protected $spyHideColumns;
 
     public static function bootSpyTrait()
     {
@@ -47,31 +48,50 @@ trait SpyTrait
 
     public function spyGetChangedFields()
     {
-        $toLog    = [];
-        $original = $this->getOriginal();
-        $dirty    = $this->getDirty();
+        $toLog         = [];
+        $original      = $this->getOriginal();
+        $dirty         = $this->getDirty();
+        $ignoreColumns = $this->spyGetIgnoreFields();
+        $hideColumns   = $this->spyGetHideFields();
 
         foreach ($dirty as $field => $value) {
-            if (in_array($field, self::$spyIgnoreColumns) || in_array($field, $this->hidden)) {
+            if (in_array($field, $ignoreColumns)) {
                 continue;
             }
-            $toLog['new'][ $field ] = $this->{$field};
+            $toLog['new'][ $field ] = in_array($field, $hideColumns)
+                ? '*'
+                : $this->{$field};
         }
 
         foreach ($original as $field => $value) {
-            if (in_array($field, self::$spyIgnoreColumns) || in_array($field, $this->hidden)) {
+            if (in_array($field, $ignoreColumns)) {
                 continue;
             }
             if (isset($toLog['new'][ $field ])) {
-                $toLog['from'][ $field ] = $value;
+
+                $toLog['from'][ $field ] = in_array($field, $hideColumns)
+                    ? '*'
+                    : $value;
             }
         }
 
         return $toLog;
     }
 
+    public function spyGetIgnoreFields()
+    {
+        return $this->spyIgnoreColumns ?? [ 'created_at', 'updated_at', 'deleted_at' ];
+    }
+
+    public function spyGetHideFields()
+    {
+        return $this->spyHideColumns ?? [ 'password', 'remember_token' ];
+    }
+
     public function spyGetUserId()
     {
-        return Auth::check() ? Auth::user()->id : null;
+        return Auth::check()
+            ? Auth::user()->id
+            : null;
     }
 }

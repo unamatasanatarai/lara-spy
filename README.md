@@ -19,14 +19,6 @@ php artisan vendor:publish --provider="Unamatasanatarai\LaraSpy\SpyServiceProvid
 ```
 
 ```
-"require": {
-    "unamatasanatarai/lara-spy": "dev-master"
-},
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/unamatasanatarai/lara-spy.git"
-    }
-],
+\Spy::log('Opened a page', 'homes');
 ```
 https://packagist.org/packages/unamatasanatarai/lara-spy
