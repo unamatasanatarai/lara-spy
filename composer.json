@@ -1,7 +1,7 @@
 {
     "name": "unamatasanatarai/lara-spy",
     "type": "library",
-    "description": "Hash me like with dropbox",
+    "description": "Spying utility for model user interactions",
     "homepage": "https://github.com/unamatasanatarai/lara-spy",
     "keywords": ["laravel5","versioning","revision","activity log"],
     "license": "MIT",
